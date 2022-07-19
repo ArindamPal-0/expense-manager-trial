@@ -149,3 +149,38 @@ creating the index.html basic template with bootstrap setup
   </body>
 </html>
 ```
+
+
+adding static compiled and minified bootstrap css and js.
+
+```html
+<!-- index.html -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Expense Manager</title>
+
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <script defer src="/static/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">Expense Manager</a>
+      </div>
+    </nav>
+    <div class="bg-dark text-white container-flex">
+      <div class="row bg-success">
+        <div class="border border-white col-2">
+          Column1
+        </div>
+        <div class="border border-white col">
+          Column2
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+```
