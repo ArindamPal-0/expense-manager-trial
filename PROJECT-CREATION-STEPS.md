@@ -184,3 +184,21 @@ adding static compiled and minified bootstrap css and js.
   </body>
 </html>
 ```
+
+### using pipenv dev environment
+
+Install `pipenv` if not already installed, make sure to open Powershell as administrator.
+```Powershell(admin)
+$ pip install pipenv
+```
+
+Activate virtual environment and install dependencies.
+```Powershell
+$ mkdir .venv
+$ pipenv shell
+$ pipenv install django
+$ python manage.py runserver # running server is same as before
+```
+
+To exit the virtual environment, use the `exit` command.
+

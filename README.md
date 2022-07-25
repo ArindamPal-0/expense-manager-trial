@@ -6,10 +6,17 @@
 ## Setup
 
 ### Dev Env Setup (Windows)
+
+Install `pipenv` if not already installed, make sure to open Powershell as administrator.
+```Powershell(admin)
+$ pip install pipenv
+```
+
+Activate virtual environment and install dependencies.
 ```Powershell
-$ python -m venv .venv
-$ .venv/Scripts/Activate.ps1
-(.venv)$ pip install django
+$ mkdir .venv # so the pipenv uses this folder for virtual environment
+$ pipenv shell
+$ pipenv install --dev
 ```
 
 ### To run the application
