@@ -16,7 +16,7 @@ Activate virtual environment and install dependencies.
 ```Powershell
 $ mkdir .venv # so the pipenv uses this folder for virtual environment
 $ pipenv shell
-$ pipenv install --dev
+(.venv)$ pipenv install --dev
 ```
 
 ### To run the application

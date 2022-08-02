@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock title %} | Expense Manager</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script> -->
+
+    <link href="/static/css/custom.css" rel="stylesheet">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <script defer src="/static/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div id="main" class="container-fluid d-flex flex-column">
+
+      <!-- <div class="row">
+        hello
+      </div>
+      <div class="row bg-dark text-light flex-grow-1">
+        hello2
+      </div> -->
+
+      <!-- the navbar which shows only title -->
+      <div class="row">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="/">Expense Manager</a>
+          </div>
+        </nav>
+      </div>
+
+      <!-- below navbar -->
+      <div class="row flex-grow-1 bg-dark text-light">
+
+        <!-- the side nav -->
+        <div class="col-2 list-group p-0">
+
+            <a href="/" class="custom-tab-width list-group-item list-group-item-action {% block expenseactive %}{% endblock expenseactive %}">Expenses</a>
+            <a href="/summary" class="custom-tab-width list-group-item list-group-item-action {% block summaryactive %}{% endblock summaryactive %}">Summary</a>
+
+          {% comment %} <a class="custom-tab-width row bg-dark text-light border border-light text-decoration-none d-flex flex-row align-items-center" href="/"><div class="text-center">Expenses</div></a>
+          <a class="custom-tab-width row bg-dark text-light border border-light text-decoration-none d-flex flex-row align-items-center" href="/summary"><div class="text-center">Summary</div></a> {% endcomment %}
+
+
+          <!-- <div class="custom-tab-width row bg-light text-dark border border-dark  d-flex flex-row align-items-center"><div class="text-center">Row</div></div> -->
+        </div>
+
+        <!-- content of the page -->
+        <div class="col bg-light border-start border-top border-white p-0 overflow-auto">
+          <div class="container-fluid bg-dark h-100 mh-100 text-light d-flex flex-column justify-content-evenly">
+            {% block content %}
+            {% endblock content %}
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </body>
+</html>
