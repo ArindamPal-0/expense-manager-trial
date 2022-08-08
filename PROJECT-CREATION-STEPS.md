@@ -407,3 +407,45 @@ def index(request):
     # rendering the template
     return render(request, 'index.html', context=context)
 ```
+
+### implementing the add expense form
+
+adding csrf token to the forms.
+```html
+<form action="/" method="POST">
+  {% csrf_token %}
+
+  ...
+</form>
+```
+
+adding the functionality to add the expense to the database after form is submitted.
+
+```python
+# webapp/views.py
+
+from datetime import date
+
+def index(requests):
+  if request.method == 'POST':
+        print('form submitted')
+
+        try:
+            name: str = request.POST.get('expense_name')
+            amountStr: str = request.POST.get('expense_amount')
+            amount: float = float(amountStr)
+            
+            print(name, amount)
+
+            # create the expense item and save it
+            
+            expense: Expense = Expense(name=name, amount=amount, date=date.today())
+            expense.save()
+        except ValueError:
+            # do some kind of error handling
+            # TODO: add alert card with the error message
+            print('ValueError: cannot parse amount value to float')
+            pass
+
+    ...
+```

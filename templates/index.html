@@ -8,10 +8,11 @@
 <!-- Heading -->
 <h1 class="text-center">Expenses</h1>
 
-<!-- Search bar -->
+<!-- Search Bar -->
 <div class="row justify-content-center">
   <div class="col-6">
-    <form class="d-flex" role="search">
+    <form action="" method="POST" class="d-flex" role="search">
+      {% csrf_token %}
       <input
         class="form-control me-2"
         type="search"
@@ -22,37 +23,30 @@
     </form>
   </div>
 </div>
+<!-- end Search Bar -->
 
-<!-- List of expenses server rendered -->
-<div class="row justify-content-center" style="height: 70%; max-height: 70%; overflow-x: hidden; overflow-y: auto;">
-  <div class="col-8 border border-2 rounded border-light p-1">
-    <ul class="list-group">
-
-      <!-- forloop template to render all the expenses in a list -->
-      {% for expense in expenses %}
-        <li class="list-group-item">{{expense.name}}</li>
-      {% endfor %}
-    </ul>
-  </div>
-</div>
-
-<!-- Add Expense Form -->
+<!-- Add-Expense-Form -->
 <div class="row justify-content-center">
   <div class="col-10">
     <form action="/" method="POST">
+      {% csrf_token %}
       <div class="row">
         <div class="col-6">
           <input
-            type="text"
-            class="form-control"
-            placeholder="Expense name"
+          type="text"
+          class="form-control"
+          id="expense_name"
+          name="expense_name"
+          placeholder="Expense name"
             aria-label="Expense name"
-          />
+            />
         </div>
         <div class="col-3">
           <input
             type="text"
             class="form-control"
+            id="expense_amount"
+            name="expense_amount"
             placeholder="Amount"
             aria-label="Amount"
           />
@@ -64,4 +58,20 @@
     </form>
   </div>
 </div>
+<!-- end Add-Expense-Form -->
+
+<!-- ExpensesList -->
+<div class="row justify-content-center" style="height: 70%; max-height: 70%; overflow-x: hidden; overflow-y: auto;">
+  <div class="col-8 border border-2 rounded border-light p-1">
+    <ul class="list-group">
+
+      <!-- forloop template to render all the expenses in a list -->
+      {% for expense in expenses %}
+      <li class="list-group-item">{{expense.name}}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+<!-- end ExpensesList -->
+
 {% endblock content %}
