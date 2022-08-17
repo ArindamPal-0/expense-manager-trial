@@ -6,6 +6,9 @@ from datetime import date
 # Create your views here.
 # the default view or expenses view
 def index(request):
+    context: dict[str, any] = {}
+    alerts: list[dict[str, str]] = []
+
     # if the any of the form is submitted
     if request.method == 'POST':
         print('form submitted')
@@ -21,20 +24,33 @@ def index(request):
             
             expense: Expense = Expense(name=name, amount=amount, date=date.today())
             expense.save()
+            alerts.append(
+                {
+                    'style': 'success',
+                    'type': 'Success', 
+                    'message': 'Expense added successfully'
+                }
+            )
         except ValueError:
             # do some kind of error handling
-            # TODO: add alert card with the error message
             print('ValueError: cannot parse amount value to float')
-            pass
+            alerts.append(
+                {
+                    'style': 'danger',
+                    'type': 'Error', 
+                    'message': 'Enter a valid amount'
+                }
+            )
 
 
     # getting all the expenses
     expenses: list[Expense] = Expense.objects.all()
 
     # passing the expenses to the template
-    context: dict[str, any] = {
+    context.update({
+        'alerts': alerts,
         'expenses': expenses
-    }
+    })
 
     # rendering the template
     return render(request, 'index.html', context=context)

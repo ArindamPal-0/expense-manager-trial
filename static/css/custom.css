@@ -1,13 +1,33 @@
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 #main {
-    height: 100vh;
+  height: 100vh;
 }
 
 .custom-tab-width {
-    display: block;
-    height: 50px;
+  display: block;
+  height: 50px;
+}
+
+.cicon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: cover;
+  mask-size: cover;
+}
+
+.cicon-pencil {
+  -webkit-mask-image: url(/static/icons/pencil-create.svg);
+  mask-image: url(/static/icons/pencil-create.svg);
+}
+
+.cicon-trash {
+  -webkit-mask-image: url(/static/icons/trash-empty.svg);
+  mask-image: url(/static/icons/trash-empty.svg);
 }
