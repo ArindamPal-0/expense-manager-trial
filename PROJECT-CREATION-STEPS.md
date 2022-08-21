@@ -449,3 +449,28 @@ def index(requests):
 
     ...
 ```
+
+### proper expense cards
+
+### success/error alerts
+
+### fixing layout
+
+### separating the add, update and delete functionality from index view
+
+separating the add, update and delete functionality from index view will ensure code modularity and prevent cluttering in a single view.
+
+<br>
+
+test diff code block
+```diff python
+
+- import datetime
++ from datetime import datetime
+
+def print_datetime() -> None:
+-   print(datetime.datetime.now())
++   print(datetime.now())
+
+```
+

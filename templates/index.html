@@ -11,7 +11,7 @@
 <!-- Search Bar -->
 <div class="row mb-3 justify-content-center">
   <div class="col-6">
-    <form action="" method="POST" class="d-flex" role="search">
+    <form action="/" method="POST" class="d-flex" role="search">
       {% csrf_token %}
       <input
         class="form-control me-2"
@@ -28,7 +28,7 @@
 <!-- Add-Expense-Form -->
 <div class="row my-3 justify-content-center">
   <div class="col-10">
-    <form action="/" method="POST">
+    <form action="/add_expense" method="POST">
       {% csrf_token %}
       <div class="row">
         <div class="col-6">
