@@ -97,6 +97,49 @@ def update_expense(request: HttpRequest) -> HttpResponse:
 # delete expense view
 
 def delete_expense(request: HttpRequest) -> HttpResponse:
+    alert: dict[str, str] | None = None
+
+    # form submitted to delete expense
+    if request.method == 'POST':
+        print('delete form submitted')
+
+        try:
+            # get id from the POST request
+            idStr: str | None = request.POST.get('id')
+            print(type(idStr) == str)
+            print(idStr)
+
+            # convert id from str to int
+            id: int = int(idStr)
+
+            # TODO: Check if id is valid
+
+            # query expense object based on id
+            expense: Expense = Expense.objects.get(id=id)
+
+            print(expense)
+
+            # deleting the expense record
+            print(expense.delete())
+
+            alert = {
+                'style': 'success',
+                'type': 'Success',
+                'message': f"Successfully deleted expense with id {id}"
+            }
+
+        except Exception as e:
+            print(f'error deleting record: {e}')
+            alert = {
+                "style": "danger",
+                "type": "Error",
+                "message": "Couldn't delete the expense"
+            }
+
+        # adding alert to session if alert exists
+        if alert is not None:
+            request.session['alert'] = alert
+
     return redirect('home')
 
 # the summary view

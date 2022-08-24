@@ -78,9 +78,13 @@
           <span class="badge btn btn-dark rounded-pill">
             <span class="cicon cicon-pencil bg-light"></span>
           </span>
-          <span class="badge btn btn-danger rounded-pill">
-            <span class="cicon cicon-trash bg-light"></span>
-          </span>
+          <form class="d-inline" action="/delete_expense" method="POST">
+            <input type="number" name="id" value="{{expense.id}}" hidden/>
+            {% csrf_token %}
+            <button type="submit" class="badge btn btn-danger rounded-pill">
+              <span class="cicon cicon-trash bg-light"></span>
+            </button>
+          </form>
         </div>
       </li>
       {% endfor %}
