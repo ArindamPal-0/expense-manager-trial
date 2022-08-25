@@ -5,6 +5,68 @@
 {% block expenseactive %}active{% endblock expenseactive %}
 
 {% block content %}
+
+<!-- Delete expense confirmation modal -->
+
+<!-- Button trigger modal -->
+<!-- Trial button for the delete functionality -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal" data-expense-id="1" data-expense-name="expense-1" data-expense-amount="20">
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered text-dark">
+    <div class="modal-content container-fluid">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Expense Delete Confirmation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>[id = <span id="expense-id">expense-id</span>] <span id="expense-name">expense-name</span> - ₹ <span id="expense-amount">expense-amount</span></p>
+      </div>
+      <div class="border-top py-3">
+        <form action="/delete_expense" method="POST" id="deleteForm" class="d-grid">
+          {% csrf_token %}
+          <input type="number" name="id" value="" hidden />
+          <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Delete Expense</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script defer>
+  console.log("Hello, World!");
+
+  const deleteModal = document.getElementById("deleteModal");
+  if(deleteModal) {
+    deleteModal.addEventListener('show.bs.modal', event => {
+      console.log('delete modal triggered');
+
+      // getting the button which triggered the modal show event
+      const button = event.relatedTarget;
+
+      // getting expense id, name and amount from button's data attributes
+      const id = button.getAttribute('data-expense-id');
+      const name = button.getAttribute('data-expense-name');
+      const amount = button.getAttribute('data-expense-amount');
+
+      console.log(id, name, amount);
+
+      // updating the modal's body with the expense details
+      deleteModal.querySelector('#expense-id').textContent = id;
+      deleteModal.querySelector('#expense-name').textContent = name;
+      deleteModal.querySelector('#expense-amount').textContent = amount;
+
+      // updating the value of id input field in the form
+      const inputField = deleteModal.querySelector('#deleteForm input[type=number]');
+      console.log(inputField);
+      inputField.value = id;
+    });
+  }
+</script>
+
 <!-- Heading -->
 <h1 class="text-center mt-3 mb-5">Expenses</h1>
 
@@ -78,13 +140,13 @@
           <span class="badge btn btn-dark rounded-pill">
             <span class="cicon cicon-pencil bg-light"></span>
           </span>
-          <form class="d-inline" action="/delete_expense" method="POST">
-            <input type="number" name="id" value="{{expense.id}}" hidden/>
-            {% csrf_token %}
-            <button type="submit" class="badge btn btn-danger rounded-pill">
-              <span class="cicon cicon-trash bg-light"></span>
-            </button>
-          </form>
+
+          <!-- Button which triggers the delete confirmation modal -->
+          <!-- It also contains the expense details in its data attributes -->
+          <button type="submit" class="badge btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#deleteModal" data-expense-id="{{expense.id}}" data-expense-name="{{expense.name}}" data-expense-amount="{{expense.amount}}">
+            <span class="cicon cicon-trash bg-light"></span>
+          </button>
+          
         </div>
       </li>
       {% endfor %}
@@ -92,5 +154,7 @@
   </div>
 </div>
 <!-- end ExpensesList -->
+
+
 
 {% endblock content %}

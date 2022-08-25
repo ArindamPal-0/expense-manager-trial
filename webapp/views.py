@@ -110,7 +110,7 @@ def delete_expense(request: HttpRequest) -> HttpResponse:
             print(idStr)
 
             # convert id from str to int
-            id: int = int(idStr)
+            id: int = int(idStr, 10)
 
             # TODO: Check if id is valid
 
@@ -122,6 +122,7 @@ def delete_expense(request: HttpRequest) -> HttpResponse:
             # deleting the expense record
             print(expense.delete())
 
+            # success alert of expense deletion
             alert = {
                 'style': 'success',
                 'type': 'Success',
